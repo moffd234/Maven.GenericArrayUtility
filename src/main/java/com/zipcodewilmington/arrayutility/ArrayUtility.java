@@ -1,6 +1,5 @@
 package com.zipcodewilmington.arrayutility;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -32,6 +31,14 @@ public class ArrayUtility<T>{
     }
 
     public T[] removeValue(T valueToRemove) {
+        int i = 0;
+        for(int j = 0; j < array.length; j++ ){
+            if(!array[j].equals(valueToRemove)){
+                array[i++] = array[j]; // Put array[j] at array[i] then increase i by 1
+            }
+        }
+        array = Arrays.copyOf(array, i); // Shrink array to the size of array - number of times
+                                         // Value to remove occurs
         return array;
     }
 
@@ -63,6 +70,5 @@ public class ArrayUtility<T>{
         }
         return mostCommon;
     }
-
 
 }
