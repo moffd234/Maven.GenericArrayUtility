@@ -24,8 +24,9 @@ public class ArrayUtility<T>{
     }
 
     public Integer countDuplicatesInMerge(T[] arrayToMerge, T valueToEvaluate) {
-
+        // Merge arrayToMerge with array created in the constructor
         T[] newArr = merge(arrayToMerge);
+
         // Find number of times valueToEvaluate occurs
         return getNumberOfOccurrences(valueToEvaluate, newArr);
     }
@@ -43,12 +44,24 @@ public class ArrayUtility<T>{
         }
         return total;
     }
+
     public Integer getNumberOfOccurrences(T valueToEvaluate) {
         return getNumberOfOccurrences(valueToEvaluate, array);
     }
 
     public T getMostCommonFromMerge(T[] arrayToMerge) {
-        return array[1];
+        T[] newArray = merge(arrayToMerge);  // Merges arrayToMerge with array initialized in the constructor
+        T mostCommon = newArray[0];
+        int maxNum = Integer.MIN_VALUE;
+
+        for(T t : newArray){
+            int currentNumOccurrences = getNumberOfOccurrences(t, newArray);
+            if(currentNumOccurrences > maxNum){
+                mostCommon = t;
+                maxNum = currentNumOccurrences;
+            }
+        }
+        return mostCommon;
     }
 
 
