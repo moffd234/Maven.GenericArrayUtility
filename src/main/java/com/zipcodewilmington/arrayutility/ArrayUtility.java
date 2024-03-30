@@ -13,28 +13,28 @@ public class ArrayUtility<T>{
         array = inputArray;
     }
 
-    public Integer countDuplicatesInMerge(T[] arrayToMerge, T valueToEvaluate) {
+    private T[] merge(T[] arrayToMerge){
         Object[] newArr = new Object[arrayToMerge.length + array.length];
 
         // Combine the two arrays into the newArr
         System.arraycopy(arrayToMerge,0,newArr,0,arrayToMerge.length);
         System.arraycopy(array, 0, newArr, arrayToMerge.length, array.length);
 
+        return (T[]) newArr;
+    }
+
+    public Integer countDuplicatesInMerge(T[] arrayToMerge, T valueToEvaluate) {
+
+        T[] newArr = merge(arrayToMerge);
         // Find number of times valueToEvaluate occurs
-        int total = 0;
-        for(int i = 0; i < newArr.length; i++){
-            if(newArr[i] == valueToEvaluate){
-                total ++;
-            }
-        }
-        return total;
+        return getNumberOfOccurrences(valueToEvaluate, newArr);
     }
 
     public T[] removeValue(T valueToRemove) {
         return array;
     }
 
-    public Integer getNumberOfOccurrences(T valueToEvaluate) {
+    private Integer getNumberOfOccurrences(T valueToEvaluate, T[] array){
         int total = 0;
         for(T t : array){
             if(t == valueToEvaluate){
@@ -42,6 +42,9 @@ public class ArrayUtility<T>{
             }
         }
         return total;
+    }
+    public Integer getNumberOfOccurrences(T valueToEvaluate) {
+        return getNumberOfOccurrences(valueToEvaluate, array);
     }
 
     public T getMostCommonFromMerge(T[] arrayToMerge) {
